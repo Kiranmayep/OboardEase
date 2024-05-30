@@ -1,0 +1,80 @@
+OnboardMate
+OnboardMate is an interactive assistant designed to help users understand and navigate through various project files by generating summaries and responding to user queries. The application leverages natural language processing (NLP) models and machine learning techniques to provide relevant information based on the uploaded project files.
+
+Features
+File Upload: Users can upload project files in different formats such as text, Python scripts, images, and videos.
+File Summarization: Text and code files are summarized using NLP models, while images are analyzed for visual summaries.
+Interactive Query System: Users can ask questions related to the uploaded files and get relevant responses.
+File Management: Uploaded files are stored in a SQLite database.
+
+Technologies Used
+Streamlit: For building the interactive web application.
+SQLite: For storing the uploaded files.
+Hugging Face Transformers: For text and code summarization using the BART model.
+Replicate API: For generating image summaries.
+scikit-learn: For calculating the similarity between user queries and file summaries using TF-IDF and cosine similarity.
+
+Models
+BART (Bidirectional and Auto-Regressive Transformers): Used for summarizing text and code files. It is pre-trained on a large corpus of text and fine-tuned for summarization tasks.
+Qwen-VL-Chat Model: Used for generating summaries for image files. This model is hosted on Replicate.
+Video-LLaVA Model: This model is designed to generate summaries for video files. It is partially implemented in the current version of OnboardMate and is commented out in the code. A snippet of the model's execution as an individual component is included in the video demonstration.
+
+Setup and Installation
+Clone the Repository:
+
+bash
+git clone <repository_url>
+cd onboardmate
+Create a Virtual Environment:
+
+bash
+python3 -m venv venv
+source venv/bin/activate
+Install Dependencies:
+
+bash
+pip install -r requirements.txt
+Set Up Database:
+Ensure the database directory exists and create the SQLite database.
+
+bash
+mkdir -p database
+python -c 'from chatbot import create_database; create_database()'
+Add Replicate API Token:
+Update the chatbot.py file with your Replicate API token.
+
+python
+client = replicate.Client(api_token="Your-Replicate-API-Token")
+Run the Application:
+
+bash
+streamlit run app.py
+Usage
+Upload Files: Use the file uploader to upload your project files.
+Ask Questions: Use the input box to ask questions related to the uploaded files.
+View Responses: The assistant will provide responses based on the uploaded files.
+File Structure
+app.py: The main Streamlit application script.
+chatbot.py: Contains functions for handling database operations, file processing, summarization, and query handling.
+requirements.txt: Lists all Python dependencies.
+
+Partial Implementation
+Video Summarization: The Video-LLaVA model is intended to generate summaries for video files. Although the code is currently commented out, you can find a demonstration of its functionality in the accompanying video. The model can be integrated and tested as an individual component.
+
+Future Scope
+Complete Video Summarization Integration: Fully implement and integrate the Video-LLaVA model to support video summarization directly within the application.
+Enhanced Query Understanding: Improve the NLP capabilities to handle more complex and varied user queries, providing even more accurate and context-aware responses.
+Support for Additional File Types: Extend support to more file types, such as spreadsheets, presentations, and other common project documentation formats.
+Multi-Language Support: Enable support for summarization and query handling in multiple languages to cater to a broader audience.
+Improved Summarization Models: Continuously update and integrate the latest summarization models to enhance the accuracy and quality of summaries.
+User Authentication and Personalization: Implement user authentication to provide a personalized experience, allowing users to save their queries, preferences, and uploaded files.
+Collaboration Features: Add collaboration features where multiple users can interact with the assistant and the uploaded files in real-time.
+Performance Optimization: Optimize the performance of the application to handle larger files and faster query responses.
+
+Contributing
+Fork the repository.
+Create a new branch (git checkout -b feature-branch).
+Make your changes and commit them (git commit -am 'Add new feature').
+Push to the branch (git push origin feature-branch).
+Create a new Pull Request.
+
